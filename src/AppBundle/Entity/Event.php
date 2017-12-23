@@ -95,5 +95,12 @@ class Event
     {
         return $this->description;
     }
+	
+	public function getDescriptionLength()
+	{
+		return strlen($this->getDescription());
+	}
+	
+	
 }
 
