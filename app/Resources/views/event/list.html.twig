@@ -22,7 +22,7 @@
 			{% for event in events %}
 			<tr>
 				<td>{{ event.id }}</td>
-				<td>{{ event.title }}</td>
+				<td><a href="{{ path('view_event', { 'id': event.id }) }}">{{ event.title }}</a></td>
 				<td>{{ event.description }}</td>
 				<td>
 					<a type="button" href="{{ path('edit_event', { 'id': event.id }) }}" class="btn btn-primary">Edit</a>

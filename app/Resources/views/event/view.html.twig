@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block main_column %}
+	{% if event %}
+	
+	<h3>{{ event.title }}</h3>
+		
+	<p>{{ event.description }}</p>
+	
+	<a href="{{ path('view_events') }}">Back to all events</a>
+	
+	{% endif %}	
+	
+{% endblock %}
+

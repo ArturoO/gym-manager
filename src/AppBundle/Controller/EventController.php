@@ -24,6 +24,21 @@ class EventController extends Controller
 	}
 	
 	/**
+     * @Route("/event/{id}", name="view_event", requirements={"id"="\d+"})
+     */
+    public function viewEventAction(Request $request, $id)
+    {
+		//fetch event from DB
+		$Event = $this->getDoctrine()
+			->getRepository(Event::class)
+			->find($id);
+		
+		return $this->render('event/view.html.twig', array(			
+            'event' => $Event,
+        ));
+	}
+	
+	/**
      * @Route("/event/create", name="create_event")
      */
     public function createEventAction(Request $request)
@@ -58,7 +73,6 @@ class EventController extends Controller
      */
     public function editEventAction(Request $request, $id)
     {
-		
 		//fetch event from DB
 		$Event = $this->getDoctrine()
 			->getRepository(Event::class)
