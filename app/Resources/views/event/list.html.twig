@@ -2,6 +2,12 @@
 
 {% block main_column %}
 	{% if events %}
+	
+	{% for flash_message in app.session.flashBag.get('event-notice') %}
+		<div class="alert alert-info mt30">
+			<strong>Info!</strong> {{ flash_message }}
+		</div>
+	{% endfor %}
 	<h3>List of all events</h3>
 	<table class="table table-striped">
 		<thead>
