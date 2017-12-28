@@ -16,8 +16,21 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+		
+		$collapsibleAreaArray = array(
+			array(
+				'collapse' => 0,
+				'content' => 'Sed sagittis nunc diam, mattis molestie neque vehicula eu. In ut eleifend nisl. Mauris eu nisl ultricies, auctor lacus in, suscipit leo. Suspendisse at lacus sit amet lacus scelerisque congue vel ac ex. Etiam eget orci pharetra, egestas velit sed, pharetra tellus. Duis rhoncus nisl vel luctus auctor. Nunc porttitor, risus ultricies egestas faucibus, lacus eros eleifend justo, at mattis turpis dui lobortis tellus. ',
+			),
+			array(
+				'collapse' => 1,
+				'content' => 'Fusce finibus diam ut nunc fermentum elementum. Sed lectus arcu, elementum volutpat ligula ac, vulputate scelerisque risus. Etiam vitae tellus eleifend, lacinia ante in, auctor dolor. Nam tempus fermentum ante pretium commodo. Duis ut imperdiet dolor. Nunc ullamcorper, velit eget maximus sodales, lectus ligula vulputate augue, quis congue massa risus vel turpis. Aenean id sagittis metus, in accumsan augue. Pellentesque feugiat eleifend bibendum. ',
+			),
+		);
+		
+		
         return $this->render('default/index.html.twig', array(
-            
+            'collapsibleAreaArray' => $collapsibleAreaArray,
         ));
     }
 	
