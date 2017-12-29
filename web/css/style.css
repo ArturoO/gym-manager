@@ -30,12 +30,57 @@ footer {
   .row.content {height:auto;} 
 }
 
+/* general */
 .mt30
 {
 	margin-top: 30px;
 }
 
+/* collapsible area */
 .collapsible-area
 {
+	padding: 20px 0 0;
 	overflow: hidden;
+	position: relative;
 }
+.collapsible-area .ca-controls
+{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 16px;
+	height: 16px;
+	color: #333333;
+}
+.collapsible-area .ca-controls>span
+{
+	font-size: 16px;
+	cursor: pointer;
+}
+.collapsible-area .ca-controls>span.ca-control-expand
+{
+	display: none;
+}
+.collapsible-area .ca-controls>span.ca-control-collapse
+{
+	display: block;
+}
+.collapsible-area.ca-state-collapsed .ca-controls>span.ca-control-expand
+{
+	display: block;
+}
+.collapsible-area.ca-state-collapsed .ca-controls>span.ca-control-collapse
+{
+	display: none;
+}
+
+
+
+
+
+
+
+
+
+
+

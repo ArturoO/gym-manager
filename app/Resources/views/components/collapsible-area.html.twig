@@ -1,3 +1,9 @@
-<div class="collapsible-area mt30" data-collapse="{{ collapsibleArea['collapse'] }}">
-	{{ collapsibleArea['content'] }}
+<div class="collapsible-area" data-collapse="{{ collapsibleArea['collapse'] }}">
+	<div class="ca-controls">
+		<span class="ca-control-collapse glyphicon glyphicon-minus"></span>
+		<span class="ca-control-expand glyphicon glyphicon-plus"></span>
+	</div>
+	<div class="ca-content">
+		{{ collapsibleArea['content'] }}
+	</div>
 </div>
