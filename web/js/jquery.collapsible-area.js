@@ -1,31 +1,34 @@
 (function($) {
 	
 	
-	function CollapsibleArea(el)
+	function CollapsibleArea(objects)
 	{
 		var options;
-		this.$el = $(el);	//array or objects, not a single one
+		this.$objects = $(objects);	//array or objects, not a single object
 	}
 	
 	CollapsibleArea.prototype.init = function()
 	{
-		if(this.$el.attr('data-collapse')==1)
+		for(var i=0; i<this.$objects.length; i++)
 		{
-			this.collapse();
-		}		
+			if(this.$objects.eq(i).attr('data-collapse')==1)
+			{
+				this.collapse(this.$objects.eq(i));
+			}
+		}
 	}
 	
-	CollapsibleArea.prototype.collapse = function()
+	CollapsibleArea.prototype.collapse = function($el)
 	{
-		this.$el.animate(
+		$el.animate(
 			{'height': '10px'},
 			200
-		);			
+		);
 	}
 	
-	CollapsibleArea.prototype.expand = function()
+	CollapsibleArea.prototype.expand = function($el)
 	{
-		this.$el.animate(
+		$el.animate(
 			{'height': ''},
 			200
 		);
