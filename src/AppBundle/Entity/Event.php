@@ -113,6 +113,29 @@ class Event
 		return strlen($this->getDescription());
 	}
 	
+	/**
+     * Set hours
+     *
+     * @param ArrayCollection $hours
+     *
+     * @return Event
+     */
+    public function setHours($hours)
+    {
+        $this->hours = $hours;
+
+        return $this;
+    }
+
+    /**
+     * Get hours
+     *
+     * @return ArrayCollection
+     */
+    public function getHours()
+    {
+        return $this->hours;
+    }
 	
 }
 

@@ -225,6 +225,20 @@ class EventHour
         return $this->eventId;
     }
 	
+	/**
+     * Set Event
+     *
+     * @param Event $event
+     *
+     * @return EventHour
+     */
+    public function setEvent($event)
+    {
+        $this->event = $event;
+
+        return $this;
+    }
+	
     /**
      * Get event
      *
