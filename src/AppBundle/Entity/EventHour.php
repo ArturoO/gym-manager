@@ -12,6 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class EventHour
 {
+	
+	/**
+     * @ORM\ManyToOne(targetEntity="Event", inversedBy="hours")
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
+     */
+    private $event;
+	
     /**
      * @var int
      *
@@ -216,6 +223,16 @@ class EventHour
     public function getEventId()
     {
         return $this->eventId;
+    }
+	
+    /**
+     * Get event
+     *
+     * @return Event
+     */
+    public function getEvent()
+    {
+        return $this->event;
     }
 }
 
