@@ -1,4 +1,8 @@
 jQuery(document).ready(function($) {
 	
-	$('.collapsible-area').collapsibleArea();
+	$('.collapsible-area.closed').collapsibleArea();
+	
+	$('.collapsible-area.opened').collapsibleArea({
+		'collapse' : 1
+	});
 });

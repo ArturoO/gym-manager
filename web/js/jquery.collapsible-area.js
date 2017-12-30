@@ -1,21 +1,18 @@
 (function($) {
 	
-	function CollapsibleArea(objects)
+	function CollapsibleArea(objects, options)
 	{
-//		this.$objects = $(objects);
+		this.options = $.extend({
+			// default
+			collapse: 0,
+		}, options);
 		this.$objects = objects;
 	}
 	
 	CollapsibleArea.prototype.init = function()
 	{
-		for(var i=0; i<this.$objects.length; i++)
-		{
-			if(this.$objects.eq(i).attr('data-collapse')==1)
-			{
-				this.collapse(this.$objects.eq(i));
-//				this.$objects.eq(i).css('height', '45px').addClass('ca-state-collapsed');
-			}
-		}
+		if(this.options.collapse)
+			this.collapse(this.$objects);
 		
 		//assign handlers
 		this.$objects.find('.ca-control-collapse').on('click', this.collapseClick);		
@@ -61,8 +58,8 @@
 		);
 	}
 	
-	$.fn.collapsibleArea = function() {
-		var CA = new CollapsibleArea(this);
+	$.fn.collapsibleArea = function(options) {
+		var CA = new CollapsibleArea(this, options);
 		CA.init();
 	};
 	
