@@ -18,6 +18,9 @@ class EventController extends Controller
     {
 		$repository = $this->getDoctrine()->getRepository(Event::class);		
 		$events = $repository->findAll();
+		
+//		create_event_hour
+		
 		return $this->render('event/list.html.twig', array(			
             'events' => $events,
         ));

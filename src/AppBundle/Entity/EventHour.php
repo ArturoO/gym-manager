@@ -68,7 +68,7 @@ class EventHour
      *
      * @ORM\Column(name="event_id", type="integer")
      */
-    private $eventId;
+    private $event_id;
 
 
     /**
@@ -210,7 +210,7 @@ class EventHour
      */
     public function setEventId($eventId)
     {
-        $this->eventId = $eventId;
+        $this->event_id = $eventId;
 
         return $this;
     }
@@ -222,7 +222,7 @@ class EventHour
      */
     public function getEventId()
     {
-        return $this->eventId;
+        return $this->event_id;
     }
 	
 	/**
