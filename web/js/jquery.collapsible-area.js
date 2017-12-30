@@ -2,26 +2,33 @@
 	
 	function CollapsibleArea(objects, options)
 	{
-		this.options = $.extend({
-			// default
+		var self = this;
+		this.defaults = {
 			collapse: 0,
-		}, options);
+		};
+		this.options = $.extend(true, {}, this.defaults, options); //deep copy
 		this.$objects = objects;
+		
+		function collapseClick()
+		{
+			self.collapse($(this).closest('.collapsible-area'));
+		}
+		
+		function expandClick()
+		{
+			self.expand($(this).closest('.collapsible-area'));
+		}
+		
+		//assign handlers
+		this.$objects.find('.ca-control-collapse').on('click', collapseClick);
+		this.$objects.find('.ca-control-expand').on('click', expandClick);
+		
 	}
 	
 	CollapsibleArea.prototype.init = function()
 	{
 		if(this.options.collapse)
 			this.collapse(this.$objects);
-		
-		//assign handlers
-		this.$objects.find('.ca-control-collapse').on('click', this.collapseClick);		
-		this.$objects.find('.ca-control-expand').on('click', this.expandClick);		
-	}
-	
-	CollapsibleArea.prototype.collapseClick = function()
-	{
-		CollapsibleArea.prototype.collapse($(this).closest('.collapsible-area'));
 	}
 	
 	CollapsibleArea.prototype.collapse = function($el)
@@ -34,11 +41,6 @@
 				$el.addClass('ca-state-collapsed');
 			}
 		);
-	}
-	
-	CollapsibleArea.prototype.expandClick = function()
-	{
-		CollapsibleArea.prototype.expand($(this).closest('.collapsible-area'));
 	}
 	
 	CollapsibleArea.prototype.expand = function($el)
@@ -61,6 +63,7 @@
 	$.fn.collapsibleArea = function(options) {
 		var CA = new CollapsibleArea(this, options);
 		CA.init();
+		return this;
 	};
 	
 })(jQuery);
