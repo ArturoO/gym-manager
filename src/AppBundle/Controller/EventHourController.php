@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Utils;
+use AppBundle\Entity\Event;
 use AppBundle\Entity\EventHour;
 use AppBundle\Form\EventHourType;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,15 +55,19 @@ class EventHourController extends Controller
 		$form->handleRequest($request);
 
 		if($form->isSubmitted() && $form->isValid()) {
+			$Event = $this->getDoctrine()
+				->getRepository(Event::class)
+				->find($event_id);
+			
 			$EventHour = $form->getData();
 			
 			$duration = Utils::datetime_diff_minutes($EventHour->getEnd(), $EventHour->getStart());
-			$EventHour->setDuration($duration);
-//				->setEventId();
+			$EventHour->setDuration($duration)
+				->setEvent($Event);
 
-			echo '<pre>';
-			var_dump($EventHour);
-			die;
+//			echo '<pre>';
+//			var_dump($EventHour);
+//			die;
 			
 			//calculate duration
 

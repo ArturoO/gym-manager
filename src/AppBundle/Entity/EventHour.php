@@ -12,8 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class EventHour
 {
-	
-	/**
+	 /**
      * @ORM\ManyToOne(targetEntity="Event", inversedBy="hours")
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
      */
@@ -41,8 +40,8 @@ class EventHour
      * @ORM\Column(name="end", type="datetimetz")
      */
     private $end;
-
-    /**
+	
+	/**
      * @var int
      *
      * @ORM\Column(name="duration", type="integer")
@@ -68,7 +67,7 @@ class EventHour
      *
      * @ORM\Column(name="event_id", type="integer")
      */
-    private $event_id;
+    private $eventId;
 
 
     /**
@@ -128,11 +127,21 @@ class EventHour
     {
         return $this->end;
     }
+	
+	/**
+     * Get duration
+     *
+     * @return int
+     */
+    public function getDuration()
+    {
+        return $this->duration;
+    }
 
     /**
      * Set duration
      *
-     * @param integer $duration
+     * @param int $duration
      *
      * @return EventHour
      */
@@ -141,16 +150,6 @@ class EventHour
         $this->duration = $duration;
 
         return $this;
-    }
-
-    /**
-     * Get duration
-     *
-     * @return int
-     */
-    public function getDuration()
-    {
-        return $this->duration;
     }
 
     /**
@@ -210,7 +209,7 @@ class EventHour
      */
     public function setEventId($eventId)
     {
-        $this->event_id = $eventId;
+        $this->eventId = $eventId;
 
         return $this;
     }
@@ -222,11 +221,11 @@ class EventHour
      */
     public function getEventId()
     {
-        return $this->event_id;
+        return $this->eventId;
     }
 	
 	/**
-     * Set Event
+     * Set event
      *
      * @param Event $event
      *
@@ -238,7 +237,7 @@ class EventHour
 
         return $this;
     }
-	
+
     /**
      * Get event
      *

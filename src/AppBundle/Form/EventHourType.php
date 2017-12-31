@@ -25,7 +25,6 @@ class EventHourType extends AbstractType
 			))
             ->add('description', TextareaType::class)
 			->add('location', TextType::class)
-			->add('event_id', HiddenType::class)
             ->add('save', SubmitType::class)
         ;
     }
