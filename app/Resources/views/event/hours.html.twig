@@ -1,41 +1,36 @@
 {% extends 'base.html.twig' %}
 
 {% block main_column %}
-	{% if events %}
 	
-	{% for flash_message in app.session.flashBag.get('event-notice') %}
-		<div class="alert alert-info mt30">
-			<strong>Info!</strong> {{ flash_message }}
-		</div>
-	{% endfor %}
-	<h3>List of all events</h3>
+	<h3>List of hours for event: {{ event.title }}</h3>
 	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>ID</th>
-				<th>Event</th>
 				<th>Start</th>
 				<th>End</th>
 				<th>Duration</th>
 				<th>Description</th>
-				<th>Location</th>				
+				<th>Location</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
-			{% for event in events %}
+			{% for hour in hours %}
 			<tr>
-				<td>{{ event.id }}</td>
-				<td><a href="{{ path('view_event', { 'id': event.id }) }}">{{ event.title }}</a></td>
-				<td>{{ event.description }}</td>
+				<td>{{ hour.id }}</td>
+				<td>{{ hour.start|date('d-m-Y H:i:s') }}</td>
+				<td>{{ hour.end|date('d-m-Y H:i:s') }}</td>
+				<td>{{ hour.duration }}</td>
+				<td>{{ hour.description }}</td>
+				<td>{{ hour.location }}</td>
 				<td>
 					<a type="button" href="{{ path('edit_event', { 'id': event.id }) }}" class="btn btn-primary">Edit</a>
 					<a type="button" href="{{ path('delete_event', { 'id': event.id }) }}" class="btn btn-danger">Delete</a>
-					<a type="button" href="{{ path('create_event_hour', { 'event_id': event.id }) }}" class="btn btn-primary">Add Hour</a>
 				</td>
 			</tr>
 			{% endfor %}
 		</tbody>
 	</table>
-	{% endif %}	
 	
 {% endblock %}

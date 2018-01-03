@@ -30,14 +30,14 @@ class EventHour
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="start", type="datetimetz")
+     * @ORM\Column(name="start", type="datetime")
      */
     private $start;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="end", type="datetimetz")
+     * @ORM\Column(name="end", type="datetime")
      */
     private $end;
 	

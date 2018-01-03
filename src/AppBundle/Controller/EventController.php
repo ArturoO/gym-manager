@@ -57,12 +57,11 @@ class EventController extends Controller
 			->getRepository(Event::class)
 			->find($id);
 	
+		$hours = $Event->getEventHours();
 		
-		echo '<pre>';
-var_dump($Event);
-die;
 		return $this->render('event/hours.html.twig', array(			
             'event' => $Event,
+			'hours' => $hours,
         ));
 	}
 	
