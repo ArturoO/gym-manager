@@ -46,6 +46,7 @@ class EventController extends Controller
      */
     public function viewEventHoursAction(Request $request, $id)
     {
+		
 		//fetch event from DB
 		$Event = $this->getDoctrine()
 			->getRepository(Event::class)

@@ -67,6 +67,35 @@ class EventHourController extends Controller
      */
 	public function editEventHourAction(Request $request, $id)
 	{
+		//fetch event from DB
+		$EventHour = $this->getDoctrine()
+			->getRepository(EventHour::class)
+			->find($id);
+		
+		$event_id = $EventHour->getEvent()->getId();
+		
+		$form = $this->createForm(EventHourType::class, $EventHour);
+		
+		$form->handleRequest($request);
+//
+		if($form->isSubmitted() && $form->isValid()) {
+			$EventHour = $form->getData();
+			
+			$em = $this->getDoctrine()->getManager();
+			$em->flush();
+			
+			//add flash message and redirect to event list
+			$this->addFlash(
+				'event-notice',
+				'Event hour has been changed'
+			);
+//			return $this->redirectToRoute('view_events');
+			return $this->redirectToRoute('view_event_hours', array('id' => $event_id));
+		}
+		
+        return $this->render('event_hour/edit.html.twig', array(			
+            'form' => $form->createView(),
+        ));
 		
 	}
 	
