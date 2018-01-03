@@ -19,7 +19,7 @@ class Event
 	/**
      * @ORM\OneToMany(targetEntity="EventHour", mappedBy="event")
      */
-    private $hours;
+    private $eventHours;
 	
     /**
      * @var int
@@ -114,27 +114,27 @@ class Event
 	}
 	
 	/**
-     * Set hours
+     * Set eventHours
      *
-     * @param ArrayCollection $hours
+     * @param ArrayCollection $eventHours
      *
      * @return Event
      */
-    public function setHours($hours)
+    public function setEventHours($eventHours)
     {
-        $this->hours = $hours;
+        $this->eventHours = $eventHours;
 
         return $this;
     }
 
     /**
-     * Get hours
+     * Get eventHours
      *
      * @return ArrayCollection
      */
-    public function getHours()
+    public function getEventHours()
     {
-        return $this->hours;
+        return $this->eventHours;
     }
 	
 }

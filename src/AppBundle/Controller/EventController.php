@@ -36,7 +36,32 @@ class EventController extends Controller
 			->getRepository(Event::class)
 			->find($id);
 		
+//		$hours = $Event->getHours();
+//		echo '<pre>';
+//var_dump($hours);
+//die;
+
 		return $this->render('event/view.html.twig', array(			
+            'event' => $Event,
+        ));
+	}
+	
+	/**
+     * @Route("/event/{id}/hours", name="view_event_hours", requirements={"id"="\d+"})
+     */
+    public function viewEventHoursAction(Request $request, $id)
+    {
+		
+		//fetch event from DB
+		$Event = $this->getDoctrine()
+			->getRepository(Event::class)
+			->find($id);
+	
+		
+		echo '<pre>';
+var_dump($Event);
+die;
+		return $this->render('event/hours.html.twig', array(			
             'event' => $Event,
         ));
 	}
@@ -105,7 +130,7 @@ class EventController extends Controller
 	}
 	
 	/**
-     * @Route("/delete/edit/{id}", name="delete_event", requirements={"id"="\d+"})
+     * @Route("/event/delete/{id}", name="delete_event", requirements={"id"="\d+"})
      */
     public function deleteEventAction(Request $request, $id)
     {
