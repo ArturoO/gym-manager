@@ -36,11 +36,6 @@ class EventController extends Controller
 			->getRepository(Event::class)
 			->find($id);
 		
-//		$hours = $Event->getHours();
-//		echo '<pre>';
-//var_dump($hours);
-//die;
-
 		return $this->render('event/view.html.twig', array(			
             'event' => $Event,
         ));
@@ -51,7 +46,6 @@ class EventController extends Controller
      */
     public function viewEventHoursAction(Request $request, $id)
     {
-		
 		//fetch event from DB
 		$Event = $this->getDoctrine()
 			->getRepository(Event::class)

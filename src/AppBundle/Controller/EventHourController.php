@@ -53,12 +53,40 @@ class EventHourController extends Controller
 				'event-notice',
 				'Event Hour has been added'
 			);
-			return $this->redirectToRoute('view_events');
+			return $this->redirectToRoute('view_event_hours', array('id' => $event_id));
 		}
 		
         return $this->render('event_hour/create.html.twig', array(			
             'form' => $form->createView(),
         ));
+	}
+	
+	
+	/**
+     * @Route("/event-hour/edit/{id}", name="edit_event_hour"), requirements={"id"="\d+"})
+     */
+	public function editEventHourAction(Request $request, $id)
+	{
+		
+	}
+	
+	/**
+     * @Route("/event-hour/delete/{id}", name="delete_event_hour"), requirements={"id"="\d+"})
+     */
+	public function deleteEventHourAction(Request $request, $id)
+	{
+		$EventHour = $this->getDoctrine()
+			->getRepository(EventHour::class)
+			->find($id);
+		
+		$event_id = $EventHour->getEvent()->getId();
+		
+		$em = $this->getDoctrine()->getManager();
+		
+		$em->remove($EventHour);
+		$em->flush();
+		
+		return $this->redirectToRoute('view_event_hours', array('id' => $event_id));
 	}
 	
 }
