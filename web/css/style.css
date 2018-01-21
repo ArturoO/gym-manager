@@ -39,6 +39,36 @@ footer {
 {
 	
 }
+/* event hour list */
+ul.event-hours
+{
+	
+	list-style-type: none;
+	padding: 0;
+}
+ul.event-hours li.day
+{
+	padding-bottom: 20px;
+}
+ul.event-hours li.day span
+{
+	font-weight: 700;
+}
+ul.event-hours li.event-hour
+{
+	
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #444;
+}
+ul.event-hours li.event-hour span
+{
+	/*display: block;*/
+}
+ul.event-hours li.event-hour span.event-hour-title
+{
+	margin-right: 20px;
+}
 /* collapsible area */
 .collapsible-area
 {

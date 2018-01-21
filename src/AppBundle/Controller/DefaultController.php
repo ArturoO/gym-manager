@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Event;
+use AppBundle\Entity\EventHour;
 use AppBundle\Form\EventType;
 use \Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,12 +13,18 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
-	
     /**
      * @Route("/", name="homepage")
      */
     public function indexAction(Request $request)
     {
+		$repository = $this->getDoctrine()->getRepository(EventHour::class);
+		
+		$query = $repository->createQueryBuilder('eh')
+			->where('eh.start > :currentDay')
+			->setParameter('currentDay', new \DateTime('now'))
+			->getQuery();
+		$eventHours = $query->getResult();
 		
 		$collapsibleAreaArray = array(
 			array(
@@ -32,7 +39,8 @@ class DefaultController extends Controller
 		
 		
         return $this->render('default/index.html.twig', array(
-            'collapsibleAreaArray' => $collapsibleAreaArray,
+            'eventHours' => $eventHours,
+			'collapsibleAreaArray' => $collapsibleAreaArray,
         ));
     }
 	

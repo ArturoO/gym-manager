@@ -4,7 +4,34 @@
 <h1>Welcome</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 <hr>
-<h3>Test</h3>
+<h3>Event hours</h3>
+
+{% if eventHours %}
+	{% set day = '' %}
+	<ul class="event-hours">
+	{% for eventHour in eventHours %}
+		{# display day #}
+		{% if day=='' or  day!=eventHour.start()|date('Y-m-d') %}
+			{% set day = eventHour.start()|date('Y-m-d') %}
+			<li class="day">
+				<span>{{ eventHour.start()|date('l') }} ({{ eventHour.start()|date('d-m-Y')}})</span>
+			</li>
+		{% endif %}
+		
+		{# display event hour #}
+		<li class="event-hour">
+			<span class="event-hour-title">{{ eventHour.Event().title() }}</span>
+			<span class="event-hour-start-end">
+				{{ eventHour.start()|date('H:i') }} - {{ eventHour.end()|date('H:i') }}
+				{% if eventHour.start()|date('Y-m-d')!=eventHour.end()|date('Y-m-d') %}
+					({{eventHour.end()|date('Y-m-d')}})
+				{% endif %}
+			</span>
+		</li>
+	{% endfor %}
+	</ul>
+{% endif %}
+
 
 {% for collapsibleArea in collapsibleAreaArray %}
 	{{ include('components/collapsible-area.html.twig') }}
