@@ -44,12 +44,11 @@ class EventController extends Controller
      */
     public function viewEventHoursAction(Request $request, $id)
     {
-		
 		//fetch event from DB
 		$Event = $this->getDoctrine()
 			->getRepository(Event::class)
 			->find($id);
-	
+		
 		$hours = $Event->getEventHours();
 		
 		return $this->render('event/hours.html.twig', array(			

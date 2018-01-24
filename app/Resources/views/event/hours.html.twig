@@ -9,9 +9,8 @@
 				<th>ID</th>
 				<th>Start</th>
 				<th>End</th>
-				<th>Duration</th>
-				<th>Description</th>
-				<th>Location</th>
+				<th>Day</th>
+				<th>Description</th>				
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -19,11 +18,10 @@
 			{% for hour in hours %}
 			<tr>
 				<td>{{ hour.id }}</td>
-				<td>{{ hour.start|date('d-m-Y H:i') }}</td>
-				<td>{{ hour.end|date('d-m-Y H:i') }}</td>
-				<td>{{ hour.duration }}</td>
+				<td>{{ hour.start|date('H:i') }}</td>
+				<td>{{ hour.end|date('H:i') }}</td>
+				<td>{{ hour.dayName() }}</td>
 				<td>{{ hour.description }}</td>
-				<td>{{ hour.location }}</td>
 				<td>
 					<a type="button" href="{{ path('edit_event_hour', { 'id': hour.id }) }}" class="btn btn-primary">Edit</a>
 					<a type="button" href="{{ path('delete_event_hour', { 'id': hour.id }) }}" class="btn btn-danger">Delete</a>

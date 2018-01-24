@@ -35,13 +35,9 @@ class EventHourController extends Controller
 			$Event = $this->getDoctrine()
 				->getRepository(Event::class)
 				->find($event_id);
-			
-			//calculate duration
-			$duration = Utils::datetime_diff_minutes($EventHour->getEnd(), $EventHour->getStart());
-			
+						
 			//set event hour parameters
-			$EventHour->setDuration($duration)
-				->setEvent($Event);
+			$EventHour->setEvent($Event);
 
 			//save record
 			$em = $this->getDoctrine()->getManager();

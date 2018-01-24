@@ -20,11 +20,31 @@ class DefaultController extends Controller
     {
 		$repository = $this->getDoctrine()->getRepository(EventHour::class);
 		
+		//day order
+//		$daysOrder = range(1,7);
+//		$today = date('N');		
+//		$part1 = array_slice($daysOrder, $today-1);
+//		$part2 = array_slice($daysOrder, 0, $today-1);
+//		$daysOrder = implode(',', array_merge($part1, $part2));
+		
 		$query = $repository->createQueryBuilder('eh')
-			->where('eh.start > :currentDay')
-			->setParameter('currentDay', new \DateTime('now'))
+			->where('eh.day >= :today')
+			->setParameter('today', date('N'))
+			->orderBy('eh.day', 'asc')	
 			->getQuery();
-		$eventHours = $query->getResult();
+		$eventHours1 = $query->getResult();
+		
+		$query = $repository->createQueryBuilder('eh')
+			->where('eh.day < :today')
+			->setParameter('today', date('N'))
+			->orderBy('eh.day', 'asc')	
+			->getQuery();
+		$eventHours2 = $query->getResult();
+		
+		$eventHours = array_merge($eventHours1, $eventHours2);
+			
+//		dump($eventHours);
+//		die;
 		
 		$collapsibleAreaArray = array(
 			array(

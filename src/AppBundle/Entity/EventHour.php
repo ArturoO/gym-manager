@@ -28,26 +28,26 @@ class EventHour
     private $id;
 
     /**
-     * @var \DateTime
+     * @var \Time
      *
-     * @ORM\Column(name="start", type="datetime")
+     * @ORM\Column(name="start", type="time")
      */
     private $start;
 
     /**
-     * @var \DateTime
+     * @var \Time
      *
-     * @ORM\Column(name="end", type="datetime")
+     * @ORM\Column(name="end", type="time")
      */
     private $end;
 	
 	/**
      * @var int
      *
-     * @ORM\Column(name="duration", type="integer")
+     * @ORM\Column(name="day", type="integer")
      */
-    private $duration;
-
+    private $day;
+	
     /**
      * @var string
      *
@@ -56,19 +56,11 @@ class EventHour
     private $description;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="location", type="string", length=255)
-     */
-    private $location;
-
-    /**
      * @var int
      *
      * @ORM\Column(name="event_id", type="integer")
      */
     private $eventId;
-
 
     /**
      * Get id
@@ -83,7 +75,7 @@ class EventHour
     /**
      * Set start
      *
-     * @param \DateTime $start
+     * @param \Time $start
      *
      * @return EventHour
      */
@@ -97,7 +89,7 @@ class EventHour
     /**
      * Get start
      *
-     * @return \DateTime
+     * @return \Time
      */
     public function getStart()
     {
@@ -107,7 +99,7 @@ class EventHour
     /**
      * Set end
      *
-     * @param \DateTime $end
+     * @param \Time $end
      *
      * @return EventHour
      */
@@ -121,37 +113,13 @@ class EventHour
     /**
      * Get end
      *
-     * @return \DateTime
+     * @return \Time
      */
     public function getEnd()
     {
         return $this->end;
     }
 	
-	/**
-     * Get duration
-     *
-     * @return int
-     */
-    public function getDuration()
-    {
-        return $this->duration;
-    }
-
-    /**
-     * Set duration
-     *
-     * @param int $duration
-     *
-     * @return EventHour
-     */
-    public function setDuration($duration)
-    {
-        $this->duration = $duration;
-
-        return $this;
-    }
-
     /**
      * Set description
      *
@@ -175,31 +143,67 @@ class EventHour
     {
         return $this->description;
     }
-
-    /**
-     * Set location
+	
+	/**
+     * Set day
      *
-     * @param string $location
+     * @param integer $day
      *
      * @return EventHour
      */
-    public function setLocation($location)
+    public function setDay($day)
     {
-        $this->location = $location;
+        $this->day = $day;
 
         return $this;
     }
 
     /**
-     * Get location
+     * Get day
+     *
+     * @return int
+     */
+    public function getDay()
+    {
+        return $this->day;
+    }
+
+	/**
+     * Get day name
      *
      * @return string
      */
-    public function getLocation()
+    public function getDayName()
     {
-        return $this->location;
+		$dayName = '';
+		
+		switch($this->day) {
+			case 1: 
+				$dayName = 'Monday';
+				break;
+			case 2: 
+				$dayName = 'Tuesday';
+				break;
+			case 3: 
+				$dayName = 'Wednesday';
+				break;
+			case 4: 
+				$dayName = 'Thursday';
+				break;
+			case 5: 
+				$dayName = 'Friday';
+				break;
+			case 6: 
+				$dayName = 'Saturday';
+				break;
+			case 7: 
+				$dayName = 'Sunday';
+				break;
+		}
+		
+        return $dayName;
     }
-
+	
     /**
      * Set eventId
      *
