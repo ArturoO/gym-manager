@@ -76,7 +76,7 @@ class EventHourController extends Controller
 		$form = $this->createForm(EventHourType::class, $EventHour);
 		
 		$form->handleRequest($request);
-//
+
 		if($form->isSubmitted() && $form->isValid()) {
 			$EventHour = $form->getData();
 			
@@ -88,7 +88,7 @@ class EventHourController extends Controller
 				'event-notice',
 				'Event hour has been changed'
 			);
-//			return $this->redirectToRoute('view_events');
+			
 			return $this->redirectToRoute('view_event_hours', array('id' => $event_id));
 		}
 		

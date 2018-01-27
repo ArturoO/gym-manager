@@ -21,7 +21,7 @@ class DefaultController extends Controller
 		$repository = $this->getDoctrine()->getRepository(EventHour::class);
 		
 		$query = $repository->createQueryBuilder('eh')			
-			->orderBy('eh.day, eh.start', 'asc')	
+			->orderBy('eh.day, eh.start, eh.end', 'asc')	
 			->getQuery();
 		$eventHours = $query->getResult();
 		

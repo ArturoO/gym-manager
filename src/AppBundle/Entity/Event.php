@@ -19,6 +19,7 @@ class Event
 	
 	/**
      * @ORM\OneToMany(targetEntity="EventHour", mappedBy="event")
+	 * @ORM\OrderBy({"day" = "ASC", "start" = "ASC", "end" = "ASC"})
      */
     private $eventHours;
 	
