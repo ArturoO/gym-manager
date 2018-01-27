@@ -48,14 +48,7 @@
 
 		<div class="container text-center">    
 			<div class="row content">
-				<div class="col-sm-8 text-left"> 
-					{% block main_column %}{% endblock %}
-				</div>
-				
-			  <div class="col-sm-4 sidenav">
-				  {% block sidebar_column %}{% endblock %}
-			  </div>
-			  
+				{% block page_content %}{% endblock %}
 			</div>
 		 </div>
 
