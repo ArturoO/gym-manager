@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Entity;
+
 use AppBundle\Entity\EventHour;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
