@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -29,6 +31,12 @@ class User implements UserInterface, \Serializable
      */
     private $username;
 
+	/**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+	
     /**
      * @var string
      *
@@ -90,6 +98,26 @@ class User implements UserInterface, \Serializable
         return $this->username;
     }
 
+	/**
+     * Get planPassword
+     *
+     * @return string
+     */
+	public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+	
+	/**
+     * Set planPassword
+     *
+     * @return string
+     */
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+    }
+	
     /**
      * Set password
      *
