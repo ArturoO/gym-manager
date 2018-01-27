@@ -30,9 +30,10 @@
 						<span class="caret"></span>
 					  </a>
 					  <ul class="dropdown-menu">
-						  <li><a href="{{ path('view_events') }}">View all</a></li>
-						<li><a href="{{ path('create_event') }}">Create</a></li>
-						
+							<li><a href="{{ path('view_events') }}">View all</a></li>
+							{% if is_granted('ROLE_ADMIN') %}
+							<li><a href="{{ path('create_event') }}">Create</a></li>
+							{% endif %}
 					  </ul>
 				  </li>
 				  <li><a href="#">About</a></li>

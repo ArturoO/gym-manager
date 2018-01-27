@@ -8,6 +8,7 @@ use AppBundle\Entity\Event;
 use AppBundle\Form\EventType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class EventController extends Controller
 {
@@ -41,6 +42,7 @@ class EventController extends Controller
 	
 	/**
      * @Route("/event/{id}/hours", name="view_event_hours", requirements={"id"="\d+"})
+	 * @Security("has_role('ROLE_ADMIN')")
      */
     public function viewEventHoursAction(Request $request, $id)
     {
@@ -59,6 +61,7 @@ class EventController extends Controller
 	
 	/**
      * @Route("/event/create", name="create_event")
+	 * @Security("has_role('ROLE_ADMIN')")
      */
     public function createEventAction(Request $request)
     {
@@ -89,6 +92,7 @@ class EventController extends Controller
 	
 	/**
      * @Route("/event/edit/{id}", name="edit_event", requirements={"id"="\d+"})
+	 * @Security("has_role('ROLE_ADMIN')")
      */
     public function editEventAction(Request $request, $id)
     {
@@ -122,6 +126,7 @@ class EventController extends Controller
 	
 	/**
      * @Route("/event/delete/{id}", name="delete_event", requirements={"id"="\d+"})
+	 * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteEventAction(Request $request, $id)
     {

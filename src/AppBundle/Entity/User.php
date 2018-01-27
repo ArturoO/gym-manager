@@ -57,11 +57,18 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="active", type="boolean")
      */
     private $active;
-
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="role", type="string", length=255, unique=false)
+     */
+    private $role;
+	
 	public function __construct()
 	{
-		$this->setActive(true);
-		;
+		$this->setRole('ROLE_USER')
+			->setActive(true);
 	}
 
     /**
@@ -190,6 +197,30 @@ class User implements UserInterface, \Serializable
         return $this->active;
     }
 	
+	/**
+     * Set role
+     *
+     * @param string $role
+     *
+     * @return User
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * Get role
+     *
+     * @return string
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+	
 	public function getSalt()
     {
         // you *may* need a real salt depending on your encoder
@@ -199,7 +230,7 @@ class User implements UserInterface, \Serializable
 	
 	public function getRoles()
     {
-        return array('ROLE_USER');
+        return explode(',', $this->getRole());
     }
 
     public function eraseCredentials()

@@ -10,12 +10,14 @@ use AppBundle\Entity\EventHour;
 use AppBundle\Form\EventHourType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class EventHourController extends Controller
 {
 	
 	/**
      * @Route("/event-hour/create/{event_id}", name="create_event_hour"), requirements={"event_id"="\d+"})
+	 * @Security("has_role('ROLE_ADMIN')")
      */
     public function createEventHourAction(Request $request, $event_id)
     {
@@ -60,6 +62,7 @@ class EventHourController extends Controller
 	
 	/**
      * @Route("/event-hour/edit/{id}", name="edit_event_hour"), requirements={"id"="\d+"})
+	 * @Security("has_role('ROLE_ADMIN')")
      */
 	public function editEventHourAction(Request $request, $id)
 	{
@@ -97,6 +100,7 @@ class EventHourController extends Controller
 	
 	/**
      * @Route("/event-hour/delete/{id}", name="delete_event_hour"), requirements={"id"="\d+"})
+	 * @Security("has_role('ROLE_ADMIN')")
      */
 	public function deleteEventHourAction(Request $request, $id)
 	{
