@@ -40,6 +40,9 @@ class EventHourController extends Controller
 						
 			//set event hour parameters
 			$EventHour->setEvent($Event);
+			
+			//set author
+			$EventHour->setAuthor($this->getUser());
 
 			//save record
 			$em = $this->getDoctrine()->getManager();

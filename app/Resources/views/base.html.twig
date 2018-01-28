@@ -42,9 +42,12 @@
 				  <li><a href="#">Contact</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-				  <li><a href="{{ path('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-				  <li><a href="{{ path('user_registration') }}"><span class="glyphicon glyphicon-log-in"></span> Register</a></li>
-				  <li><a href="{{ path('logout') }}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+					{% if not is_granted('ROLE_USER') %}
+					<li><a href="{{ path('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+					<li><a href="{{ path('user_registration') }}"><span class="glyphicon glyphicon-log-in"></span> Register</a></li>
+					{% else %}
+					<li><a href="{{ path('logout') }}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+					{% endif %}
 				</ul>
 			  </div>
 			</div>
