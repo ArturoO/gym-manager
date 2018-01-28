@@ -13,6 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
 class EventHour
 {
 	/**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="eventHours")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     */
+    private $author;
+	
+	/**
      * @ORM\ManyToOne(targetEntity="Event", inversedBy="eventHours")
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
      */
@@ -61,6 +67,13 @@ class EventHour
      * @ORM\Column(name="event_id", type="integer")
      */
     private $eventId;
+	
+	/**
+     * @var int
+     *
+     * @ORM\Column(name="author_id", type="integer")
+     */
+    private $authorId;
 
     /**
      * Get id
@@ -251,5 +264,54 @@ class EventHour
     {
         return $this->event;
     }
+	
+	/**
+     * Set authorId
+     *
+     * @param integer $authorId
+     *
+     * @return EventHour
+     */
+    public function setAuthorId($authorId)
+    {
+        $this->authorId = $authorId;
+
+        return $this;
+    }
+
+    /**
+     * Get authorId
+     *
+     * @return int
+     */
+    public function getAuthorId()
+    {
+        return $this->authorId;
+    }
+	
+	/**
+     * Set author
+     *
+     * @param User $author
+     *
+     * @return EventHour
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+	
+	/**
+     * Get author
+     *
+     * @return User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+	
 }
 

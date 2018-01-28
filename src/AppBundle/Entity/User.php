@@ -21,6 +21,11 @@ class User implements UserInterface, \Serializable
      */
     private $events;
 	
+	/**
+     * @ORM\OneToMany(targetEntity="EventHour", mappedBy="author")
+	 * @ORM\OrderBy({"day" = "ASC", "start" = "ASC", "end" = "ASC"})
+     */
+    private $eventHours;
 	
     /**
      * @var int
@@ -74,6 +79,9 @@ class User implements UserInterface, \Serializable
 	
 	public function __construct()
 	{
+		$this->events = new ArrayCollection();
+		$this->eventHours = new ArrayCollection();
+		
 		$this->setRole('ROLE_USER')
 			->setActive(true);
 	}
@@ -250,6 +258,30 @@ class User implements UserInterface, \Serializable
     public function getEvents()
     {
         return $this->events;
+    }
+	
+	/**
+     * Set eventHours
+     *
+     * @param ArrayCollection $eventHours
+     *
+     * @return Event
+     */
+    public function setEventHours($eventHours)
+    {
+        $this->eventHours = $eventHours;
+
+        return $this;
+    }
+
+    /**
+     * Get eventHours
+     *
+     * @return ArrayCollection
+     */
+    public function getEventHours()
+    {
+        return $this->eventHours;
     }
 	
 	public function getSalt()

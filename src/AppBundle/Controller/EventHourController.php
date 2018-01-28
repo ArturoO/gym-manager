@@ -66,7 +66,6 @@ class EventHourController extends Controller
      */
 	public function editEventHourAction(Request $request, $id)
 	{
-		//fetch event from DB
 		$EventHour = $this->getDoctrine()
 			->getRepository(EventHour::class)
 			->find($id);

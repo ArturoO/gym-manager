@@ -62,7 +62,7 @@ class Event
 	
 	public function __construct()
     {
-        $this->hours = new ArrayCollection();
+        $this->eventHours = new ArrayCollection();
     }
 
     /**
@@ -183,7 +183,7 @@ class Event
      *
      * @return Event
      */
-    public function setAutohr($author)
+    public function setAuthor($author)
     {
         $this->author = $author;
 
