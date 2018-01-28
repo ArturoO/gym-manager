@@ -42,7 +42,7 @@ footer {
 /* event hour list */
 ul.event-hours
 {
-	
+	display: none;
 	list-style-type: none;
 	padding: 0;
 }
