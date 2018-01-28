@@ -4,6 +4,7 @@
 	{% if event %}
 	
 	<h3>{{ event.title }}</h3>
+	<h5>Author: {{ event.getAuthor().getUsername() }}</h5>
 		
 	<p>{{ event.description }}</p>
 	

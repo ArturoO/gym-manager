@@ -15,6 +15,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, \Serializable
 {
+	
+	/**
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="author")
+     */
+    private $events;
+	
+	
     /**
      * @var int
      *
@@ -219,6 +226,30 @@ class User implements UserInterface, \Serializable
     public function getRole()
     {
         return $this->role;
+    }
+	
+	/**
+     * Set evens
+     *
+     * @param ArrayCollection $events
+     *
+     * @return Event
+     */
+    public function setEvents($events)
+    {
+        $this->events = $events;
+
+        return $this;
+    }
+	
+	/**
+     * Get events
+     *
+     * @return ArrayCollection
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 	
 	public function getSalt()

@@ -18,6 +18,12 @@ class Event
 {
 	
 	/**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="events")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     */
+    private $author;
+	
+	/**
      * @ORM\OneToMany(targetEntity="EventHour", mappedBy="event")
 	 * @ORM\OrderBy({"day" = "ASC", "start" = "ASC", "end" = "ASC"})
      */
@@ -39,6 +45,13 @@ class Event
      * @ORM\Column(name="title", type="string", length=255, unique=true)
      */
     private $title;
+	
+	/**
+     * @var int
+     *
+     * @ORM\Column(name="author_id", type="integer")
+     */
+    private $authorId;
 
     /**
      * @var string
@@ -137,6 +150,54 @@ class Event
     public function getEventHours()
     {
         return $this->eventHours;
+    }
+	
+	/**
+     * Set authorId
+     *
+     * @param integer $authorId
+     *
+     * @return Event
+     */
+    public function setAuthorId($authorId)
+    {
+        $this->authorId = $authorId;
+
+        return $this;
+    }
+
+    /**
+     * Get authorId
+     *
+     * @return int
+     */
+    public function getAuthorId()
+    {
+        return $this->authorId;
+    }
+	
+	/**
+     * Set author
+     *
+     * @param User $author
+     *
+     * @return Event
+     */
+    public function setAutohr($author)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+	
+	/**
+     * Get author
+     *
+     * @return User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 	
 }
