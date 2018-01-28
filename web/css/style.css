@@ -69,6 +69,45 @@ ul.event-hours li.event-hour span.event-hour-title
 {
 	margin-right: 20px;
 }
+/* event hours table */
+table.event-hours
+{
+	width: 100%;
+}
+table.event-hours tr
+{
+	
+}
+table.event-hours tr th
+{
+	text-align: center;
+	padding: 10px 0;
+}
+table.event-hours tr td
+{
+	vertical-align: top;
+}
+table.event-hours tr td div.event-hour
+{
+	text-align: center;
+	margin-bottom: 20px;
+}
+table.event-hours tr td div.event-hour .title
+{
+	display: block;
+}
+table.event-hours tr td div.event-hour .start
+{
+	
+}
+table.event-hours tr td div.event-hour .end
+{
+	
+}
+table.event-hours tr td div.event-hour .separate
+{
+	
+}
 /* collapsible area */
 .collapsible-area
 {

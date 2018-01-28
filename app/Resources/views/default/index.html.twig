@@ -7,6 +7,34 @@
 <h3>Event hours</h3>
 
 {% if eventHours %}
+	<table class="event-hours table">
+		<tr class="header">
+	{% for day in days %}
+		<th><span class="day-name">{{ day }}</span></th>
+	{% endfor %}
+		</tr>
+		<tr  class="content">
+			<td>
+	{% set day = 1 %}
+	{% for eventHour in eventHours %}
+		{% if day!=eventHour.getDay() %}
+			{% set day = eventHour.getDay() %}
+			</td>
+			<td>
+		{% endif %}
+				<div class="event-hour">
+					<span class="title">{{ eventHour.Event().title() }}</span>
+					<span class="start">{{ eventHour.start()|date('H:i') }}</span>
+					<span clas="separate">-</span>
+					<span class="end">{{ eventHour.end()|date('H:i') }}</span>
+				</div>				
+	{% endfor %}
+			</td>
+		</tr>
+	</table>
+{% endif %}
+
+{% if eventHours %}
 	{% set day = '' %}
 	<ul class="event-hours">
 	{% for eventHour in eventHours %}

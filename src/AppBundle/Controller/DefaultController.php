@@ -25,6 +25,16 @@ class DefaultController extends Controller
 			->getQuery();
 		$eventHours = $query->getResult();
 		
+		$days = [
+			'Monday',
+			'Tuesday',
+			'Wednesday',
+			'Thursday',
+			'Friday',
+			'Saturday',
+			'Sunday',
+		];
+		
 		$collapsibleAreaArray = array(
 			array(
 				'class' => 'closed',
@@ -38,6 +48,7 @@ class DefaultController extends Controller
 		
         return $this->render('default/index.html.twig', array(
             'eventHours' => $eventHours,
+			'days' => $days,
 			'collapsibleAreaArray' => [],
         ));
     }
