@@ -136,9 +136,14 @@ class EventController extends Controller
 		$Event = $this->getDoctrine()
 			->getRepository(Event::class)
 			->find($id);
-	
+		
 		$em = $this->getDoctrine()->getManager();
 		
+		//fetch event hours and delete them.
+		$hours = $Event->getEventHours();
+		foreach($hours as $hour)
+			$em->remove($hour);
+		//delete the event
 		$em->remove($Event);
 		$em->flush();
 		

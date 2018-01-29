@@ -17,9 +17,18 @@ class UserController extends Controller
      */
     public function indexAction(Request $request)
     {
+		$repository = $this->getDoctrine()->getRepository(User::class);
+		
+		$query = $repository->createQueryBuilder('u')			
+			->orderBy('u.id', 'asc')	
+			->getQuery();
+		
+		$users = $query->getResult();
+		
 		return $this->render(
-            'user/list.html.twig'
-        );
+            'user/list.html.twig', [
+			'users' => $users,
+		]);
 	}
 	
 	/**
