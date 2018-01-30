@@ -28,8 +28,8 @@
 				<td>{{ user.role }}</td>
 				{% if is_granted('ROLE_ADMIN') %}
 				<td>
-					<a type="button" href="" class="btn btn-primary">Edit</a>
-					<a type="button" href="" class="btn btn-danger">Delete</a>
+					<a type="button" href="{{ path('user_edit', { 'id': user.id }) }}" class="btn btn-primary">Edit</a>
+					<a type="button" href="{{ path('user_delete', { 'id': user.id }) }}" class="btn btn-danger">Delete</a>
 				</td>
 				{% endif %}
 			</tr>

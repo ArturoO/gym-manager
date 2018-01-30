@@ -1,0 +1,14 @@
+{% extends 'right-sidebar.html.twig' %}
+
+
+{% block page_content %}
+
+
+	{{ form_start(form) }}
+		{{ form_row(form.username) }}		
+		{{ form_row(form.role) }}
+
+		<button type="submit">Save!</button>
+	{{ form_end(form) }}
+
+{% endblock %}
