@@ -10,7 +10,8 @@
 				<th>Start</th>
 				<th>End</th>
 				<th>Day</th>
-				<th>Description</th>				
+				<th>Description</th>
+				<th>Author</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -22,6 +23,7 @@
 				<td>{{ hour.end|date('H:i') }}</td>
 				<td>{{ hour.dayName() }}</td>
 				<td>{{ hour.description }}</td>
+				<td>{{ event.author.getUsername() }}</td>
 				<td>
 					<a type="button" href="{{ path('edit_event_hour', { 'id': hour.id }) }}" class="btn btn-primary">Edit</a>
 					<a type="button" href="{{ path('delete_event_hour', { 'id': hour.id }) }}" class="btn btn-danger">Delete</a>
@@ -32,5 +34,6 @@
 	</table>
 		
 	<a type="button" href="{{ path('create_event_hour', { 'event_id': event.id }) }}" class="btn btn-primary">Create</a>
+	<a type="button" href="{{ path('view_events') }}" class="btn btn-default">Back</a>
 	
 {% endblock %}

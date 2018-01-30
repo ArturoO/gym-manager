@@ -94,7 +94,8 @@ class EventHourController extends Controller
 			return $this->redirectToRoute('view_event_hours', array('id' => $event_id));
 		}
 		
-        return $this->render('event_hour/edit.html.twig', array(			
+        return $this->render('event_hour/edit.html.twig', array(
+			'event_id' => $event_id,
             'form' => $form->createView(),
         ));
 		
