@@ -94,7 +94,6 @@ class EventController extends Controller
 	
 	/**
      * @Route("/event/edit/{id}", name="edit_event", requirements={"id"="\d+"})
-	 * @Security("has_role('ROLE_ADMIN')")
      */
     public function editEventAction(Request $request, $id)
     {
@@ -102,6 +101,8 @@ class EventController extends Controller
 		$Event = $this->getDoctrine()
 			->getRepository(Event::class)
 			->find($id);
+		
+		$this->denyAccessUnlessGranted('edit', $Event);
 
 		$form = $this->createForm(EventType::class, $Event);
 		
