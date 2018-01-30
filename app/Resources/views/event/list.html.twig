@@ -16,7 +16,7 @@
 				<th>Title</th>
 				<th>Description</th>
 				<th>Author</th>
-				{% if is_granted('ROLE_ADMIN') %}
+				{% if is_granted('ROLE_TRAINER') %}
 				<th>Actions</th>
 				{% endif %}
 			</tr>
@@ -28,13 +28,14 @@
 				<td><a href="{{ path('view_event', { 'id': event.id }) }}">{{ event.title }}</a></td>
 				<td>{{ event.description }}</td>
 				<td>{{ event.author.getUsername() }}</td>
-				{% if is_granted('ROLE_ADMIN') %}
 				<td>
+					{% if is_granted('edit', event) %}
 					<a type="button" href="{{ path('view_event_hours', { 'id': event.id }) }}" class="btn btn-primary">Hours</a>
 					<a type="button" href="{{ path('edit_event', { 'id': event.id }) }}" class="btn btn-primary">Edit</a>
 					<a type="button" href="{{ path('delete_event', { 'id': event.id }) }}" class="btn btn-danger">Delete</a>
+					{% endif %}
 				</td>
-				{% endif %}
+				
 			</tr>
 			{% endfor %}
 		</tbody>
