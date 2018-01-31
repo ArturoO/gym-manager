@@ -49,7 +49,14 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="username", type="string", length=25, unique=true)
      */
     private $username;
-
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="display_name", type="string", length=25)
+     */
+    private $displayName;
+	
 	/**
      * @Assert\NotBlank()
      * @Assert\Length(max=4096)
@@ -125,6 +132,30 @@ class User implements UserInterface, \Serializable
     public function getUsername()
     {
         return $this->username;
+    }
+	
+	/**
+     * Set displayName
+     *
+     * @param string $displayName
+     *
+     * @return User
+     */
+    public function setDisplayName($displayName)
+    {
+        $this->displayName = $displayName;
+
+        return $this;
+    }
+
+    /**
+     * Get displayName
+     *
+     * @return string
+     */
+    public function getDisplayName()
+    {
+        return $this->displayName;
     }
 
 	/**

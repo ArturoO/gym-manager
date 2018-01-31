@@ -100,11 +100,13 @@ class UserController extends Controller
 		// 1) build the form
 		$defaultData = array(
 			'username' => $user->getUsername(),
+			'display_name' => $user->getDisplayName(),
 			'role' => $user->getRole(),
 		);
 		
 		$form = $this->createFormBuilder($defaultData)
 			->add('username', TextType::class)
+			->add('display_name', TextType::class)
 			->add('role', ChoiceType::class, [
 				'choices' => [
 					'User' => 'ROLE_USER',
@@ -122,7 +124,8 @@ class UserController extends Controller
 			$formData = $form->getData();
 			
 			$user->setUsername($formData['username'])
-				->setRole($formData['role'])				
+				->setDisplayName($formData['display_name'])
+				->setRole($formData['role'])
 			;
 			
             // 4) save the User!
