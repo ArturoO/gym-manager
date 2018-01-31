@@ -13,6 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
 class EventHour
 {
 	/**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="trainerEventHours")
+     * @ORM\JoinColumn(name="trainer_id", referencedColumnName="id")
+     */
+    private $trainer;
+	
+	/**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="eventHours")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
@@ -74,6 +80,14 @@ class EventHour
      * @ORM\Column(name="author_id", type="integer")
      */
     private $authorId;
+	
+	/**
+     * @var int
+     *
+     * @ORM\Column(name="trainer_id", type="integer")
+     */
+    private $trainerId;
+
 
     /**
      * Get id
@@ -313,5 +327,52 @@ class EventHour
         return $this->author;
     }
 	
+	/**
+     * Set trainerId
+     *
+     * @param integer $trainerId
+     *
+     * @return EventHour
+     */
+    public function setTrainerId($trainerId)
+    {
+        $this->trainerId = $trainerId;
+
+        return $this;
+    }
+
+    /**
+     * Get trainerId
+     *
+     * @return int
+     */
+    public function getTrainerId()
+    {
+        return $this->trainerId;
+    }
+	
+	/**
+     * Set trainer
+     *
+     * @param User $trainer
+     *
+     * @return EventHour
+     */
+    public function setTrainer($trainer)
+    {
+        $this->trainer = $trainer;
+
+        return $this;
+    }
+	
+	/**
+     * Get trainer
+     *
+     * @return User
+     */
+    public function getTrainer()
+    {
+        return $this->trainer;
+    }
 }
 

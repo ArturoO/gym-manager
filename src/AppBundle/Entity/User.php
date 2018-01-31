@@ -28,6 +28,12 @@ class User implements UserInterface, \Serializable
      */
     private $eventHours;
 	
+	/**
+     * @ORM\OneToMany(targetEntity="EventHour", mappedBy="trainer")
+	 * @ORM\OrderBy({"day" = "ASC", "start" = "ASC", "end" = "ASC"})
+     */
+    private $trainerEventHours;
+	
     /**
      * @var int
      *
@@ -283,6 +289,30 @@ class User implements UserInterface, \Serializable
     public function getEventHours()
     {
         return $this->eventHours;
+    }
+	
+	/**
+     * Set trainerEventHours
+     *
+     * @param ArrayCollection $trainerEventHours
+     *
+     * @return Event
+     */
+    public function setTrainerEventHours($trainerEventHours)
+    {
+        $this->trainerEventHours = $trainerEventHours;
+
+        return $this;
+    }
+
+    /**
+     * Get trainerEventHours
+     *
+     * @return ArrayCollection
+     */
+    public function getTrainerEventHours()
+    {
+        return $this->trainerEventHours;
     }
 	
 	public function getSalt()
