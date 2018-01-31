@@ -23,7 +23,7 @@
 			<td>
 		{% endif %}
 				<div class="event-hour">
-					<span class="title">{{ eventHour.Event().title() }}</span>
+					<a href="{{ path('view_event', {'id': eventHour.getEvent().getId()}) }}" class="title">{{ eventHour.getEvent().getTitle() }}</a>
 					<span class="start">{{ eventHour.start()|date('H:i') }}</span>
 					<span clas="separate">-</span>
 					<span class="end">{{ eventHour.end()|date('H:i') }}</span>
@@ -48,7 +48,7 @@
 		
 		{# display event hour #}
 		<li class="event-hour">
-			<span class="event-hour-title">{{ eventHour.Event().title() }}</span>
+			<a href="{{ path('view_event', {'id': eventHour.getEvent().getId()}) }}" class="event-hour-title">{{ eventHour.getEvent().getTitle() }}</a>
 			<span class="event-hour-start-end">
 				{{ eventHour.start()|date('H:i') }} - {{ eventHour.end()|date('H:i') }}
 				{% if eventHour.start()|date('Y-m-d')!=eventHour.end()|date('Y-m-d') %}
