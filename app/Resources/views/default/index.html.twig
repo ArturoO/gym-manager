@@ -24,6 +24,7 @@
 		{% endif %}
 				<div class="event-hour">
 					<a href="{{ path('view_event', {'id': eventHour.getEvent().getId()}) }}" class="title">{{ eventHour.getEvent().getTitle() }}</a>
+					<a href="" class="trainer">{{ eventHour.getTrainer().getUsername() }}</a>
 					<span class="start">{{ eventHour.start()|date('H:i') }}</span>
 					<span clas="separate">-</span>
 					<span class="end">{{ eventHour.end()|date('H:i') }}</span>
@@ -49,6 +50,7 @@
 		{# display event hour #}
 		<li class="event-hour">
 			<a href="{{ path('view_event', {'id': eventHour.getEvent().getId()}) }}" class="event-hour-title">{{ eventHour.getEvent().getTitle() }}</a>
+			<a href="" class="trainer">{{ eventHour.getTrainer().getUsername() }}</a>
 			<span class="event-hour-start-end">
 				{{ eventHour.start()|date('H:i') }} - {{ eventHour.end()|date('H:i') }}
 			</span>
