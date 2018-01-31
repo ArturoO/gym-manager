@@ -38,7 +38,7 @@
 	{% set day = '' %}
 	<ul class="event-hours">
 	{% for eventHour in eventHours %}
-		{# display day #}
+		
 		{% if day=='' or  day!=eventHour.getDayName() %}
 			{% set day = eventHour.getDayName() %}
 			<li class="day">
@@ -51,9 +51,6 @@
 			<a href="{{ path('view_event', {'id': eventHour.getEvent().getId()}) }}" class="event-hour-title">{{ eventHour.getEvent().getTitle() }}</a>
 			<span class="event-hour-start-end">
 				{{ eventHour.start()|date('H:i') }} - {{ eventHour.end()|date('H:i') }}
-				{% if eventHour.start()|date('Y-m-d')!=eventHour.end()|date('Y-m-d') %}
-					({{eventHour.end()|date('Y-m-d')}})
-				{% endif %}
 			</span>
 		</li>
 	{% endfor %}

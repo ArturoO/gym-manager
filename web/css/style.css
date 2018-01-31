@@ -46,6 +46,10 @@ ul.event-hours
 	list-style-type: none;
 	padding: 0;
 }
+ul.event-hours.desktop
+{
+	display: block;
+}
 ul.event-hours li.day
 {
 	padding-bottom: 20px;

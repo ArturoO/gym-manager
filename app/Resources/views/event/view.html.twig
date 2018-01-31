@@ -4,9 +4,30 @@
 	{% if event %}
 	
 	<h3>{{ event.title }}</h3>
-	<h5>Author: {{ event.getAuthor().getUsername() }}</h5>
+	<strong>Author: {{ event.getAuthor().getUsername() }}</strong>
 		
 	<p>{{ event.description }}</p>
+	
+	{% if event.getEventHours() %}
+	<h4>Event hours:</h4>
+		{% set day = '' %}
+	<ul class="event-hours desktop">
+		{% for eventHour in event.getEventHours() %}		
+			{% if day=='' or  day!=eventHour.getDayName() %}
+				{% set day = eventHour.getDayName() %}
+		<li class="day">
+			<span>{{ eventHour.getDayName() }}</span>
+		</li>
+			{% endif %}
+		<li class="event-hour">
+			<a href="{{ path('view_event', {'id': eventHour.getEvent().getId()}) }}" class="event-hour-title">{{ eventHour.getEvent().getTitle() }}</a>
+			<span class="event-hour-start-end">
+				{{ eventHour.start()|date('H:i') }} - {{ eventHour.end()|date('H:i') }}
+			</span>
+		</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
 	
 	<a href="{{ path('view_events') }}">Back to all events</a>
 	
