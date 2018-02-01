@@ -3,6 +3,10 @@
 {% block main_column %}
 	
 	<h3>List of hours for event: {{ event.title }}</h3>
+	
+	<a type="button" href="{{ path('create_event_hour', { 'event_id': event.id }) }}" class="btn btn-primary">Create</a>
+	<a type="button" href="{{ path('view_events') }}" class="btn btn-default">Back</a>
+	
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -32,8 +36,5 @@
 			{% endfor %}
 		</tbody>
 	</table>
-		
-	<a type="button" href="{{ path('create_event_hour', { 'event_id': event.id }) }}" class="btn btn-primary">Create</a>
-	<a type="button" href="{{ path('view_events') }}" class="btn btn-default">Back</a>
 	
 {% endblock %}
