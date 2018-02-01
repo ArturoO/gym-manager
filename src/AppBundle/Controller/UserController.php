@@ -10,7 +10,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class UserController extends Controller
 {
@@ -99,14 +103,22 @@ class UserController extends Controller
 		
 		// 1) build the form
 		$defaultData = array(
-			'username' => $user->getUsername(),
 			'display_name' => $user->getDisplayName(),
+			'username' => $user->getUsername(),
+			'email' => $user->getEmail(),
+			'plain_password' => '',
 			'role' => $user->getRole(),
 		);
 		
 		$form = $this->createFormBuilder($defaultData)
-			->add('username', TextType::class)
 			->add('display_name', TextType::class)
+			->add('username', TextType::class)
+			->add('email', EmailType::class)
+			->add('plain_password', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
+            ))
 			->add('role', ChoiceType::class, [
 				'choices' => [
 					'User' => 'ROLE_USER',
@@ -115,6 +127,7 @@ class UserController extends Controller
 					'Administrator' => 'ROLE_ADMIN',
 				],
 			])
+			->add('save', SubmitType::class)
 			->getForm();
 		
         // 2) handle the submit (will only happen on POST)
@@ -123,17 +136,29 @@ class UserController extends Controller
 
 			$formData = $form->getData();
 			
-			$user->setUsername($formData['username'])
-				->setDisplayName($formData['display_name'])
-				->setRole($formData['role'])
-			;
+			$user->setDisplayName($formData['display_name'])
+				->setUsername($formData['username'])
+				->setEmail($formData['email']);
 			
+			//user role can be only changed by admin or manager
+			if(in_array($this->getUser()->getRole(), array('ROLE_ADMIN', 'ROLE_MANAGER')))
+			{
+				$user->setRole($formData['role']);
+			}
+			
+			//set password only if it isn't empty
+			if($formData['plain_password']!='')
+			{
+				$password = $passwordEncoder->encodePassword($user, $formData['plain_password']);
+				$user->setPassword($password);
+			}
+				
             // 4) save the User!
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('users_list');
+            return $this->redirectToRoute('user_edit', array('id' => $id));
         }
 
         return $this->render(

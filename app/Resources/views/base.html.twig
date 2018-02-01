@@ -53,6 +53,7 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li><a href="">My Profile</a></li>
+							<li><a href="{{ path('user_edit', {'id': app.user.id }) }}">Edit Profile</a></li>
 							<li><a href="{{ path('logout') }}">Logout</a></li>
 						</ul>
 					</li>
