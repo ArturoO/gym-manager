@@ -72,4 +72,6 @@ class EventVoter extends Voter
         // to get the entity of the user who owns this data object
         return $user === $event->getAuthor();
     }
+	
+	
 }

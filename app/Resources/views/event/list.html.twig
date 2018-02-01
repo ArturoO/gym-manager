@@ -10,7 +10,9 @@
 	{% endfor %}
 	<h3>List of all events</h3>
 	
-	<a type="button" href="{{ path('create_event') }}" class="btn btn-primary">Create</a>
+	{% if is_granted('ROLE_TRAINER') %}
+	<a type="button" href="{{ path('create_event') }}" class="btn btn-primary">Create</a>	
+	{% endif %}
 	<a type="button" href="{{ path('homepage') }}" class="btn btn-default">Back</a>
 	
 	<table class="table table-striped">
