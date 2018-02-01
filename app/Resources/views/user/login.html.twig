@@ -3,24 +3,35 @@
 
 {% block page_content %}
 
-	{% if error %}
-		<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-	{% endif %}
-
-	<form action="{{ path('login') }}" method="post">
-		<label for="username">Username:</label>
-		<input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-		<label for="password">Password:</label>
-		<input type="password" id="password" name="_password" />
-
-		{#
-			If you want to control the URL the user
-			is redirected to on success (more details below)
-			<input type="hidden" name="_target_path" value="/account" />
-		#}
-
-		<button type="submit">login</button>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			{% if error %}
+			<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			{% endif %}
+		</div>
+	</div>
+	
+	<form action="{{ path('login') }}" method="post" class="form-horizontal">
+		<div class="form-group">
+			<label class="control-label col-sm-2 required" for="username">Username:</label>
+			<div class="col-sm-10">
+				<input type="text" id="username" name="_username" required="required" class="form-control" value="{{ last_username }}" />
+			</div>			
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label col-sm-2 required" for="password">Password:</label>
+			<div class="col-sm-10">
+				<input type="password" id="password" name="_password" required="required" class="form-control" />
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary">login</button>
+			</div>
+		</div>
+		
 	</form>
 
 {% endblock %}
