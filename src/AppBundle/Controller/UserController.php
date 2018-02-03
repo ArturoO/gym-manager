@@ -59,27 +59,39 @@ class UserController extends Controller
      */
 	public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-        // 1) build the form
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-
+		$user = new User();
+		$form = $this->createFormBuilder()
+			->add('display_name', TextType::class)
+			->add('username', TextType::class)
+			->add('email', EmailType::class)
+			->add('plain_password', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
+            ))
+			->add('register', SubmitType::class)
+			->getForm();
+		
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
-            // 3) Encode the password (you could also do this via Doctrine listener)
-            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-            $user->setPassword($password);
-
+			
+			//assign user data
+			$formData = $form->getData();			
+			$user->setDisplayName($formData['display_name'])
+				->setUsername($formData['username'])
+				->setEmail($formData['email'])
+				->setPassword($passwordEncoder->encodePassword($user, $formData['plain_password']))
+				->setRole('ROLE_USER')
+				->setActive(0)
+			;
+			
             // 4) save the User!
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
-
-            return $this->redirectToRoute('users_list');
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render(
