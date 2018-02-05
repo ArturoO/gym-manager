@@ -2,43 +2,52 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+
 class Notify
 {
+	private $mailer;
+	
+	private $em;
+	
+	private $twig;
+	
+	public function __construct(\Swift_Mailer $mailer, EntityManagerInterface $em, \Twig_Environment $twig)
+	{
+		$this->mailer = $mailer;
+		$this->em = $em;
+		$this->twig = $twig;
+	}
 	
 	public function newUser($userId)
 	{
-		return 1;
+		$userRepository = $this->em->getRepository(User::class);
+		
 		//get administrator
-		$repository = $doctrine->getRepository(User::class);
-		$query = $repository->createQueryBuilder('u')
+		$query = $userRepository->createQueryBuilder('u')
 			->where('u.role = :role')
 			->setParameter('role', 'ROLE_ADMIN')
 			->getQuery();
-		$user = $query->getResult();
+		$admin = $query->getSingleResult();
 		
-		dump($user);
-		die;
-		
-		return true;
-		
-		//get new registered user
-		
-		
-		$message = (new \Swift_Message('Hello Email'))
+		//get registered user
+		$user = $userRepository->find($userId);
+				
+		$message = (new \Swift_Message('New user'))
 			->setFrom('postmaster@localhost')
-			->setTo(array(
-				'postslave@localhost',
-			))
+			->setTo($admin->getEmail())
 			->setBody(
-				'something simple',
+				$this->twig->render(
+					'email/new-user.html.twig',
+					array('user' => $user)
+				),
 				'text/html'
 			)
 		;
-		$mailer->send($message);
-
-		return new Response(
-            '<html><body>Success</body></html>'
-        );
+		$this->mailer->send($message);
+		
+		return true;
 	}
 	
 }

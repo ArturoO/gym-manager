@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Service\Notify;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -56,7 +57,7 @@ class UserController extends Controller
     /**
      * @Route("/register", name="user_registration")
      */
-	public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+	public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, Notify $notify)
     {
 		$user = new User();
 		$form = $this->createFormBuilder()
@@ -89,6 +90,8 @@ class UserController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+			
+			$notify->newUser($user->getId());
 
             return $this->redirectToRoute('homepage');
         }

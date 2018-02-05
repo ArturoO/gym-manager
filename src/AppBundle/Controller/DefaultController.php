@@ -4,10 +4,8 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use AppBundle\Entity\Event;
 use AppBundle\Entity\EventHour;
-use AppBundle\Form\EventType;
-use \Doctrine\Common\Util\Debug;
+use AppBundle\Service\Notify;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
